@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista con flechas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 10px;
+        }
+
+        ul {
+            color: rgb(255, 253, 107);
+        }
+
+        li {
+            background: #53ba96;
+            border: 1px solid #ddd;
+            margin: 5px 0;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px;
+        }
+
+        .pendiente {
+          color: #007bff;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          font-size: 20px;
+        }
+
+        .pendiente:focus {
+            border-color: #007bff;
+            background-color: #fff;
+        }
+
+        /*este hara que se pongan grises de como ya solucionados*/
+        .completada .pendiente {
+            text-decoration: line-through;
+            color: #888;
+            background-color: #e0e0e0;
+        }
+
+        /*aqui aparecera el simpolo positivo para que se interprete como finalizado*/
+        .completada::before {
+            content: "+";
+            font-size:40px;
+            color: green;
+            margin-right: 5px;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1.2em;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        button:hover {
+            background-color: #eee;
+        }
+
+        .btn-completar {
+            color: green;
+        }
+
+        .btn-eliminar {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mis tareas</h1>
+    <div>
+        <input type="text" id="NuevaTarea" placeholder="Escribe una tarea...">
+        <button id="AgregarBtn">Agregar tarea</button>
+    </div>
+    <ul id="ListaTareas"></ul>
+
+    <script>
+        //son variables globales ya que const porque no se reasignan, pero su contenido sí cambia (eso ya es nota personal mia)
+        const NewWork = document.getElementById('NuevaTarea');
+        const AddButton = document.getElementById('AgregarBtn');
+        const Lista = document.getElementById('ListaTareas');
+
+        //la función que crea un elemento <li> que es la lista con su span editable y botones
+        function crearElementoTarea(texto = '') {
+            //crea las listas
+            const li = document.createElement('li');
+            /*el createElement al parecer solo sirve si el JS esta dentro del html y no afuera de este en un
+            archivo aparte ya que aunque lo enlace con src no mas no jalo asi que decidi calarle aqui con el script
+            y que si jala, me puso triste saber eso, tantas cosas que podia hacer*/
+
+            //el span que es editable para el texto de la tarea
+            const span1 = document.createElement('span');
+            span1.className = 'pendiente';//para aplicar estilos CSS
+            span1.textContent = texto;//texto plano con el que textContent evitara que este se salga de los cuadros
+            span1.setAttribute('contenteditable', 'true');
+            //el atributo de contenteditable hece que se pueda modificar el texto
+
+            //boton para marcar como completada 
+            const Completar = document.createElement('button');
+            Completar.innerHTML = 'Completado';
+            Completar.className = 'btn-completar';//nombre de la clase
+            Completar.addEventListener('click', () => {
+                li.classList.toggle('completada');//en esta se podra añadir o quietar una clase
+            });
+
+            //boton para eliminar la tarea 
+            const Eliminar = document.createElement('button');
+            Eliminar.innerHTML = 'Eliminar';
+            Eliminar.className = 'btn-eliminar';
+            Eliminar.addEventListener('click', () => {
+                li.remove();//elimina la li del span
+            });
+
+            //aqui se agrega las propiedades del li
+            li.appendChild(span1);
+            li.appendChild(Completar);
+            li.appendChild(Eliminar);
+
+            return li;
+        }
+
+        //funcion para agregar una nueva tarea desde el input
+        function agregarTarea() {
+            const texto = NewWork.value.trim(); //usa NewWork 
+            if (texto === '') {
+                alert('Por favor escribe una tarea');
+                return;
+            }
+            const nuevaTarea = crearElementoTarea(texto);
+            Lista.appendChild(nuevaTarea);//usa Lista 
+            NewWork.value = '';//limpia el input cuando le pones enter
+        }
+
+        //evento del boton "agregar tarea"
+        AddButton.addEventListener('click', agregarTarea);
+
+        //permite agregar con la tecla Enter desde el input
+        NewWork.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                agregarTarea();
+            }
+        });
+    </script>
+</body>
+</html>
