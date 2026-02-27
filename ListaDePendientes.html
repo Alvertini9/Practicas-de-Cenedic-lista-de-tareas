@@ -116,25 +116,92 @@
 /*(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
 ((((((((((((((Arriba es el diselño del texto, boton, etc, y abajo de la animacion de los botones*/
 
-.imagen-flotante {
+.ImgCrear {
     position: fixed;
     width: 100px;
     height: 100px;
-    background-image: url("SpamtonDance.gif");
+    background-image: url("Engranaje.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     pointer-events: none;/*para que no bloquee clics */
     z-index: 10000;/*encima de todo, es como la opccion de cpa hasta adelante de canva*/
     opacity: 0;/*inicialmente invisible */
-    top: 50%;
-    left: 50%;
+    top: 10px;
+    left: 500px;
     transform: translate(-50%, -50%) scale(0); /*escala 0 para que no se vea al inicio */
     transition: opacity 0.1s; /*pequeña transición para suavizar la aparición */
 }
 
 /*animación de giro y caída */
 @keyframes girarYCaer {
+    0% {
+        opacity: 0;
+        transform: translate(-50px, -50px) rotate(500deg) scale(0);
+        background-image: url("Engranaje.png");
+    }
+    10% {
+        opacity: 1;
+        transform: translate(100px, 100px) rotate(1000deg) scale(1);/*aparece en el centro */
+        background-image: url("Engranaje.png");
+    }
+    40% {
+        opacity: 1;
+        transform: translate(100px, 100px) rotate(2000deg) scale(1);/*gira y baja un poco */
+        background-image: url("Engranaje.png");
+    }
+    50% {
+        opacity: 1;
+        transform: translate(100px, 100px) rotate(3950deg) scale(2);/*gira y aumenta el tamaño en scale
+        ademas de que la imagen cambia aqui */
+        background-image: url("PulgarUP.png");
+    }
+     60% {
+        opacity: 1;
+        transform: translate(100px, 100px) rotate(3950deg) scale(3);/*gira y aumenta el tamaño en scale */
+        background-image: url("PulgarUP.png");
+    }
+     70% {
+        opacity: 1;
+        transform: translate(100px, 100px) rotate(5000deg) scale(2);/*gira y aumenta el tamaño en scale */
+        background-image: url("PulgarUP.png");
+    }
+      80% {
+        opacity: 1;
+        transform: translate(100px, 100px) rotate(6000deg) scale(1);/*gira y aumenta el tamaño en scale */
+        background-image: url("PulgarUP.png");
+    }
+    100% {
+        opacity: 0;
+        transform: translate(100px, 100px) rotate(7000deg) scale(0.5);/*desaparece abajo */
+        background-image: url("PulgarUP.png");
+    }
+}
+
+.ImgCrear.activar {
+    animation: girarYCaer 5s ease-in-out forwards; /* 5 segundos, se queda en el último estado */
+}
+
+/*)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))*/
+
+.ImgCompletar {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background-image: url("SpanDance2.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;/*para que no bloquee clics */
+    z-index: 10000;/*encima de todo, es como la opccion de cpa hasta adelante de canva*/
+    opacity: 0;/*inicialmente invisible */
+    top: 100px;/*Este es altyura*/
+    right: 500px;
+    transform: translate(-50%, -50%) scale(0); /*escala 0 para que no se vea al inicio */
+    transition: opacity 0.1s; /*pequeña transición para suavizar la aparición */
+}
+
+@keyframes girarYCaer2 {
     0% {
         opacity: 0;
         transform: translate(-50%, -50%) rotate(0deg) scale(0);
@@ -153,8 +220,56 @@
     }
 }
 
-.imagen-flotante.activar {
-    animation: girarYCaer 5s ease-in-out forwards; /* 5 segundos, se queda en el último estado */
+.ImgEliminar.activar {
+    animation: girarYCaer2 2s ease-in-out forwards; /* 5 segundos, se queda en el último estado */
+}
+
+/*))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))*/
+
+.ImgEliminar {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background-image: url("SpamDance1.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;/*para que no bloquee clics */
+    z-index: 10000;/*encima de todo, es como la opccion de cpa hasta adelante de canva*/
+    opacity: 0;/*inicialmente invisible */
+    bottom: 100px;
+    right: 500px;;
+    transform: translate(-50%, -50%) scale(0); /*escala 0 para que no se vea al inicio */
+    transition: opacity 0.1s; /*pequeña transición para suavizar la aparición */
+}
+
+@keyframes girarYCaer3 {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(0deg) scale(0);
+    }
+    10% {
+        opacity: 1;
+        transform: translate(400px, -50%) rotate(0deg) scale(1);/*aparece en el centro */
+    }
+    80% {
+        opacity: 1;
+        transform: translate(-50%, 20%) rotate(720deg) scale(1);/*gira y baja un poco */
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 100%) rotate(1080deg) scale(0.5);/*desaparece abajo */
+    }
+}
+
+.ImgCompletar.activar {
+    animation: girarYCaer3 2s ease-in-out forwards; /* 5 segundos, se queda en el último estado */
+}
+
+/*centrar el contenedor del input y el boton */
+body > div:first-of-type {
+    text-align: center; /*centra horizontalmente los elementos inline (input y boton) */
+    margin: 20px 0;/*añpade un margen superior e inferior para separación visual */
 }
     </style>
 </head>
@@ -162,6 +277,8 @@
     <h1 id="Titulo">Mis Tareas</h1>
     <div>
         <input type="text" id="NuevaTarea" placeholder="Escribe una tarea...">
+        <br>
+        <br>
         <button id="AgregarBtn">Agregar tarea</button>
     </div>
     <ul id="ListaTareas"></ul>
@@ -207,7 +324,6 @@
             li.appendChild(span1);
             li.appendChild(Completar);
             li.appendChild(Eliminar);
-
             return li;
         }
 
@@ -248,27 +364,57 @@
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //sirve como division para saber que arriba es lo de la funcion de agregar listas y abajo el de la animacion
-function crearImagenFlotante() {
-    //crear el elemento div con la clase imagen-flotante
-    const img = document.createElement('div');/*al crear un <div> se pueden añadir imagenes o videos ya que actua
-        como si fuese otro cuado pero en una capa adelante o atras dependiendo desde que capa lo pones.*/
-    img.className = 'imagen-flotante';
-    document.body.appendChild(img);/*El appendChild  agregar un elemento hijo al final de un elemento padre,
-    basicamente, "mete" un nuevo nodo dentro de otro, al ultimo lugar.*/
-    //activar la animacion
-    img.classList.add('activar');//el activar sirvio para llamar la animacion
-    //eliminar el elemento después de 5 segundos (cuando termina la animación)
-    setTimeout(() => {
-        img.remove();
-    }, 5000); //5000ms = 5 segundos
-}
-//detectar clics en botones para activar la animación
-document.addEventListener('click', function(e) {
-    const boton = e.target.closest('button'); //verifica si se hizo clic en un botón
-    if (boton) {
-        crearImagenFlotante();
+ function crearImagenFlotante() {
+        const img = document.createElement('div');
+        img.className = 'ImgCrear';
+        document.body.appendChild(img);
+        img.classList.add('activar');
+        setTimeout(() => {
+            img.remove();
+        }, 5000);
     }
-});
+    /////////////////////////////////
+    function crearImagenFlotante2() {
+        const img = document.createElement('div');
+        img.className = 'ImgCompletar';
+        document.body.appendChild(img);
+        img.classList.add('activar');
+        setTimeout(() => {
+            img.remove();
+        }, 5000);
+    }
+    ///////////////////////////////
+    function crearImagenFlotante3() {
+        const img = document.createElement('div');
+        img.className = 'ImgEliminar';
+        document.body.appendChild(img);
+        img.classList.add('activar');
+        setTimeout(() => {
+            img.remove();
+        }, 5000);
+    }
+
+    document.addEventListener('click', function(e) {
+        const boton = e.target.closest('button');
+        if (boton) {
+            //efecto de rebote comun para todos los botones
+            boton.classList.add('btn-clicked');
+            setTimeout(() => {
+                boton.classList.remove('btn-clicked');
+            }, 300);
+
+            //ahora decidimos que animacion extra según el boton
+            if (boton.id === 'AgregarBtn') {
+                crearImagenFlotante();//Animacion para el boton agregar
+            } else if (boton.classList.contains('btn-completar')) {/*Aquí le pedimos que por la const de boton
+                se ponga como un click*/
+                crearImagenFlotante2();//Animacion para el boton completar
+            } else if (boton.classList.contains('btn-eliminar')) {
+                crearImagenFlotante3();//Animacion para el boton eliminar
+            }
+        }
+    });
+    //Dulce huele a kk
     </script>
 </body>
 </html>
