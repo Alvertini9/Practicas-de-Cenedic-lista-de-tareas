@@ -9,9 +9,9 @@
             max-width: 500px;
             margin: 20px auto;
             padding: 10px;
-            background-image: url("BordelandsLavaScence.webp");
+            background-image: url("tv-old-static.gif");
             background-repeat: no-repeat;
-            background-size: 1500px 1000px;
+            background-size: 1400px 1000px;
             background-position: center;
         }
 
@@ -23,11 +23,11 @@
             height: 300px;
             width: 580px;
             /*Aquí abajo es el de las imagenes*/
-            background-image: url("SpamDance1.gif"), url("SpanDance2.gif"), url("Estatica.gif");
-            background-size: 100px 100px, 100px 100px, 500px 500px;
-            background-position: left 10px bottom 20px , right 20px bottom 20px, center top 10px ;
+            background-image: url("Block.jpeg");
+            background-size: 500px 550px;
+            background-position: center top 10px ;
             /**/
-            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-repeat:no-repeat;
         }
 
         #AgregarBtn{
@@ -37,19 +37,18 @@
             background-position: center;
             background-size: 158px;
             background-repeat: no-repeat;
-            border: 6px rgb(22, 49, 61) outset;
+            border: 6px rgb(139, 88, 44) outset;
             border-radius: 10px;
             border-width: 8px
         }
 
         #NuevaTarea{
-            background-image: url("Estatica.gif");
-            background-repeat: no-repeat;
+            background-color: #ffffff;
         }
 
         li {
-            background: #53ba96;
-            border: 1px solid #ddd;
+            background: #ab7e4e;
+            border: 3px solid #4b1b07;
             margin: 5px 0;
             padding: 10px;
             display: flex;
@@ -59,15 +58,12 @@
         }
 
         .pendiente {
-          color: #007bff;
+          color: #000000;
           font-family: Verdana, Geneva, Tahoma, sans-serif;
           font-size: 20px;
         }
 
-        .pendiente:focus {
-            border-color: #007bff;
-            background-color: #fff;
-        }
+      
 
         /*este hara que se pongan grises de como ya solucionados*/
         .completada .pendiente {
@@ -171,7 +167,7 @@
     position: fixed;
     width: 100px;
     height: 100px;
-    background-image: url("SpanDance2.gif");
+    background-image: url("Engranaje.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -188,23 +184,27 @@
     0% {
         opacity: 0;
         transform: translate(-50%, -50%) rotate(0deg) scale(0);
+        background-image: url("Engranaje.png");
     }
-    10% {
+    40% {
         opacity: 1;
         transform: translate(-50%, -50%) rotate(0deg) scale(1);/*aparece en el centro */
+        background-image: url("Engranaje.png");
     }
     80% {
         opacity: 1;
         transform: translate(-50%, 20%) rotate(720deg) scale(1);/*gira y baja un poco */
+        background-image: url("PulgarUP.png");
     }
     100% {
         opacity: 0;
         transform: translate(-50%, 100%) rotate(1080deg) scale(0.5);/*desaparece abajo */
+        background-image: url("PulgarUP.png");
     }
 }
 
 .ImgCompletar.activar {
-    animation: girarYCaer3 2s ease-in-out forwards; /* 5 segundos, se queda en el último estado */
+    animation: girarYCaer2 2s ease-in-out forwards; /* 5 segundos, se queda en el último estado */
 }
 
 /*))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))*/
@@ -234,27 +234,27 @@
     }
     20% {
         opacity: 1;
-        transform: translate(100px, 100px) rotate(1440deg) scale(1);
+        transform: translate(100px, 100px) rotate(1440deg) scale(3);
         background-image: url("BasuraAbierta.png");
     }
     40% {
         opacity: 1;
-        transform: translate(100px, 100px) rotate(1440deg) scale(1);
+        transform: translate(100px, 100px) rotate(1440deg) scale(3);
         background-image: url("BasuraAbierta.png");
     }
     80% {
         opacity: 1;
-        transform: translate(100px, 100px) rotate(1440deg) scale(1);
+        transform: translate(100px, 100px) rotate(1440deg) scale(3);
         background-image: url("Kaboom.gif");
     }
     90% {
         opacity: 1;
-        transform: translate(100px, 100px) rotate(1440deg) scale(1);
+        transform: translate(100px, 100px) rotate(1440deg) scale(3);
         background-image: url("Basura.png");
     }
     100% {
         opacity: 0;
-        transform: translate(100px, 100px) rotate(3240deg) scale(0.5);
+        transform: translate(100px, 100px) rotate(3240deg) scale(3);
         background-image: url("Basura.png");
     }
 }
