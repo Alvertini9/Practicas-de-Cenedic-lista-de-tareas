@@ -286,8 +286,37 @@ body > div:first-of-type {
         const AddButton = document.getElementById('AgregarBtn');
         const Lista = document.getElementById('ListaTareas');
 
+        //funcion para guardar las tareas en localStorage
+        function guardarTareas() {
+            const tareas = [];
+            const items = Lista.querySelectorAll('li');
+            items.forEach(li => {
+                const span = li.querySelector('.pendiente');
+                if (span) {
+                    tareas.push({
+                        texto: span.textContent,
+                        completada: li.classList.contains('completada')
+                    });
+                }
+            });
+            localStorage.setItem('listaTareas', JSON.stringify(tareas));
+        }
+
+        //funcion para cargar las tareas desde localStorage
+        function cargarTareas() {
+            const datos = localStorage.getItem('listaTareas');
+            if (datos) {
+                const tareas = JSON.parse(datos);
+                tareas.forEach(t => {
+                    const nuevaTarea = crearElementoTarea(t.texto, t.completada);
+                    Lista.appendChild(nuevaTarea);
+                });
+            }
+        }
+
         //la función que crea un elemento <li> que es la lista con su span editable y botones
-        function crearElementoTarea(texto = '') {
+        // Acepta un segundo parámetro 'completada' para establecer el estado inicial
+        function crearElementoTarea(texto = '', completada = false) {
             //crea las listas
             const li = document.createElement('li');
             /*el createElement al parecer solo sirve si el JS esta dentro del html y no afuera de este en un
@@ -301,12 +330,18 @@ body > div:first-of-type {
             span1.setAttribute('contenteditable', 'true');
             //el atributo de contenteditable hece que se pueda modificar el texto
 
+            // Guardar cuando se edite el span (al perder el foco)
+            span1.addEventListener('blur', () => {
+                guardarTareas();
+            });
+
             //boton para marcar como completada 
             const Completar = document.createElement('button');
             Completar.innerHTML = 'Completado';
             Completar.className = 'btn-completar';//nombre de la clase
             Completar.addEventListener('click', () => {
                 li.classList.toggle('completada');//en esta se podra añadir o quietar una clase
+                guardarTareas(); // Guardar después de cambiar el estado
             });
 
             //boton para eliminar la tarea 
@@ -315,12 +350,19 @@ body > div:first-of-type {
             Eliminar.className = 'btn-eliminar';
             Eliminar.addEventListener('click', () => {
                 li.remove();//elimina la li del span
+                guardarTareas(); // Guardar después de eliminar
             });
 
             //aqui se agrega las propiedades del li
             li.appendChild(span1);
             li.appendChild(Completar);
             li.appendChild(Eliminar);
+
+            // Si la tarea debe aparecer como completada, añadimos la clase
+            if (completada) {
+                li.classList.add('completada');
+            }
+
             return li;
         }
 
@@ -334,6 +376,7 @@ body > div:first-of-type {
             const nuevaTarea = crearElementoTarea(texto);
             Lista.appendChild(nuevaTarea);//usa Lista 
             NewWork.value = '';//limpia el input cuando le pones enter
+            guardarTareas(); // Guardar después de agregar
         }
 
         //evento del boton "agregar tarea"
@@ -411,6 +454,10 @@ body > div:first-of-type {
             }
         }
     });
+
+    // Cargar las tareas guardadas al iniciar la página
+    cargarTareas();
+
     //Dulce huele a kk
     </script>
 </body>
